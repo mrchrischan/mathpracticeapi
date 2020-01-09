@@ -10,7 +10,7 @@ const db = knex({
     client: 'pg',
     connection: {
         connectionString: process.env.DATABASE_URL,
-        ssl: true,
+        ssl: true
     }
 })
 
@@ -75,18 +75,17 @@ app.post('/signup', (req, res) => {
 
 
 app.put('/updateStats', (req, res) => {
-    let found = false;
     const {id, answer} = req.body
     if (answer === 'correct') {
         db('users').where('id', '=', id)
-        .increment('questionsAnswered', 1)
-        .increment('questionsCorrect', 1)
+        .increment('questionsanswered', 1)
+        .increment('questionscorrect', 1)
         .then(res.json('updated'))
         .catch(res.status(400).json('unable to register'))
     } else {
         db('users').where('id', '=', id)
-        .increment('questionsAnswered', 1)
-        .increment('questionsIncorrect', 1)
+        .increment('questionsanswered', 1)
+        .increment('questionsincorrect', 1)
         .then(res.json('updated'))
         .catch(res.status(400).json('unable to register'))
     }
