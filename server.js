@@ -19,7 +19,9 @@ const db = knex({
 app.use(bodyParser.json())
 app.use(cors())
 
-
+app.get('/', (req, res) => {
+    res.send('it is working')
+})
 
 app.post('/signin', (req, res) => {
     db.select('email', 'hash').from('login')
@@ -92,6 +94,6 @@ app.put('/updateStats', (req, res) => {
     }
 })
 
-app.listen(3000, () => {
+app.listen(process.env.PORT, () => {
     console.log('app is running on port 3000')
 })
